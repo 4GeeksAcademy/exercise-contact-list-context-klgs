@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context, context } from "../store/appContext.js";
 import { Link } from "react-router-dom";
 
 import { ContactCard } from "../component/ContactCard.js";
@@ -8,6 +9,12 @@ export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false
 	});
+	const { store, actions } = useContext(Context);
+
+	useEffect(() => {
+		actions.obtenerInfo();
+		console.log("Estoy en useEffect", store.contacts);
+	}, []);
 
 	return (
 		<div className="container">
